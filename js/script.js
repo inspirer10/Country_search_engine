@@ -23,10 +23,13 @@ function showCountriesList(resp) {
     resp.forEach(function (item) {
         var liCountry = document.createElement('li');
         var liCapital = document.createElement('li');
+        var liRegion = document.createElement('li');
         liCountry.innerText = item.name;
         liCapital.innerText = item.capital;
+        liRegion.innerText = item.region
         countriesList.appendChild(liCountry);
         countriesList.appendChild(liCapital);
+        countriesList.appendChild(liRegion);
     });
 
 }
