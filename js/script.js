@@ -8,28 +8,35 @@ document.getElementById('search').addEventListener('click', searchCountries);
 
 function searchCountries() {
     var countryName = document.getElementById('country-name').value;
-    if (!countryName.length) countryName = 'Poland';
+    if (!countryName.length) {
+        countryName = 'Poland';
+    }
+
     fetch(url + countryName)
         .then(function (resp) {
             return resp.json();
         })
         .then(showCountriesList);
-}
+};
 
 
 function showCountriesList(resp) {
+
     countriesList.innerHTML = '';
 
     resp.forEach(function (item) {
-        var liCountry = document.createElement('li');
-        var liCapital = document.createElement('li');
-        var liRegion = document.createElement('li');
-        liCountry.innerText = item.name;
-        liCapital.innerText = item.capital;
-        liRegion.innerText = item.region
-        countriesList.appendChild(liCountry);
-        countriesList.appendChild(liCapital);
-        countriesList.appendChild(liRegion);
-    });
 
-}
+        var liEl = document.createElement('div');
+
+        liEl.innerHTML += '<li class="space"> <span>Country: </span>' + item.name + '</li>';
+        liEl.innerHTML += '<li class="space"> <span>Capital: </span>' + item.capital + '</li>';
+        liEl.innerHTML += '<li class="space"> <span>Region: </span>' + item.region + '</li>';
+        liEl.innerHTML += '<li class="space"> <span>Land area: </span>' + item.area + '<span id="sup"> km</span></li>';
+        liEl.innerHTML += '<li class="space"> <span>Population: </span>' + item.population + '</li>';
+        liEl.innerHTML += '<li class="space"> <span>Language: </span>' + item.demonym + '</li>';
+        liEl.innerHTML += '<li class="space"> <span>Currency: </span>' + item.currencies + '</li>';
+
+        countriesList.appendChild(liEl);
+
+    });
+};
